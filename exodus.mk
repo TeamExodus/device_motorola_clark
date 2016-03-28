@@ -5,7 +5,7 @@ TARGET_SCREEN_WIDTH := 2560
 # Inherit 64-bit configs
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
-# Inherit some common CM stuff.
+# Inherit some common Exodus stuff.
 $(call inherit-product, vendor/exodus/config/common_full_phone.mk)
 
 # Enhanced NFC
