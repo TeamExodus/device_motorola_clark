@@ -15,7 +15,7 @@
 #
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-$(call inherit-product-if-exists, vendor/motorola/clark/clark-vendor.mk)
+$(call inherit-product, vendor/motorola/clark/clark-vendor.mk)
 
 # Audio
 PRODUCT_COPY_FILES += \
