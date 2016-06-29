@@ -1,0 +1,22 @@
+[
+  {
+    "repository": "device_qcom_common",
+    "target_path": "device/qcom/common"
+  },
+  {
+    "repository": "kernel_motorola_msm8992",
+    "target_path": "kernel/motorola/msm8992"
+  },
+  {
+    "repository": "hardware_sony_thermanager",
+    "target_path": "hardware/sony/thermanager"
+  },
+  {
+    "repository": "hardware_sony_timekeep",
+    "target_path": "hardware/sony/timekeep"
+  },
+  {
+    "repository": "vendor_motorola_clark",
+    "target_path": "vendor/motorola/clark"
+  }
+]
