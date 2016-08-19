@@ -20,8 +20,7 @@ $(call inherit-product, vendor/motorola/clark/clark-vendor.mk)
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
-    $(LOCAL_PATH)/audio/audio_effects.conf:system/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio/audio_ext_spkr.conf:system/etc/audio_ext_spkr.conf \
+    $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/media_codecs.xml:system/etc/media_codecs.xml \
@@ -58,6 +57,9 @@ PRODUCT_PACKAGES += \
     libmmjpeg_interface \
     mm-qcamera-app \
     Snap
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/com.motorola.cameraone.xml:system/etc/permissions/com.motorola.cameraone.xml
 
 # CMActions
 # PRODUCT_PACKAGES += \
@@ -100,8 +102,13 @@ PRODUCT_PACKAGES += \
     init.mmi.touch.sh \
     init.mmi.usb.rc \
     init.qcom.power.rc \
+    init.qcom.power.sh \
     init.qcom.rc \
     ueventd.qcom.rc
+
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
+    ro.product.model \
+    ro.product.name
 
 # IPA Manager
 PRODUCT_PACKAGES += \
@@ -143,10 +150,6 @@ PRODUCT_PACKAGES += \
     nfc_nci.bcm2079x.default \
     NfcNci \
     Tag
-
-# Offmode Charging
-PRODUCT_PACKAGES += \
-    charger_res_images
 
 # Perf
 PRODUCT_COPY_FILES += \

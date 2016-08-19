@@ -210,6 +210,7 @@ on post-fs-data
     chmod 2755 /data/misc/perfd
     mkdir /data/system/perfd 0770 root system
     chmod 2770 /data/system/perfd
+    rm /data/system/perfd/default_values
 
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
@@ -227,12 +228,10 @@ on post-fs-data
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
-    chmod 0644 /sys/vibrator/pwmvalue
     chown system system /sys/devices/platform/msm_sdcc.1/polling
     chown system system /sys/devices/platform/msm_sdcc.2/polling
     chown system system /sys/devices/platform/msm_sdcc.3/polling
     chown system system /sys/devices/platform/msm_sdcc.4/polling
-    chown system system /sys/vibrator/pwmvalue
     chown audio audio /sys/kernel/aov/trigger
     chown audio audio /sys/kernel/aov/register
     chown audio audio /sys/kernel/aov/event
@@ -277,9 +276,6 @@ on post-fs-data
     mkdir /data/audio/ 0770 media audio
     mkdir /data/audio/acdbdata 0770 media audio
     mkdir /data/audio/acdbdata/delta 0770 media audio
-
-    chown system system /sys/vibrator/pwmvalue
-    chmod 0644 /sys/vibrator/pwmvalue
 
     # Create a folder for SRS to be able to create a usercfg file
     mkdir /data/data/media 0770 media media
@@ -579,10 +575,10 @@ service batt_health /system/bin/batt_health
     class main
     group mot_pwric
 
-service charge_only_mode /system/bin/charge_only_mode
-    user root
-    group graphics system input
-    disabled
+service charger /charger
+    class charger
+    group log
+    seclabel u:r:healthd:s0
 
 service motosh /system/bin/motosh boot
     class late_start
@@ -610,7 +606,8 @@ service adspd /system/bin/adspd
 service perfd /system/bin/perfd
     class main
     user root
-    disabled
+    group system
+    socket perfd seqpacket 0666 root system
     writepid /dev/cpuset/system-background/tasks
 
 service iop /system/bin/iop
